@@ -24,7 +24,15 @@ if (
         Welcome,
         <?= htmlspecialchars($_SESSION['name'], ENT_QUOTES, 'UTF-8') ?>!     
     </p>
+
+    <form action = "logout.php" method = "POST">
+        <button type = "submit">Log out</button>
+    </form>
     
-    <p>You are logged in succesfully.</p>
+    <p>
+        <a href = "create_student.php">Create Student Account</a>
+    </p>
+    
+    <p>You are logged in successfully.</p>
 </body>
 </html>
