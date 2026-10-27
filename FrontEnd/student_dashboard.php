@@ -6,19 +6,22 @@ if(
     ($_SESSION['role'] ?? '') !== 'student'
 ) {
     header('Location: index.php');
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
-    <link rel = "stylesheet" href = "css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <main class = "login-container">
+    <main class="login-container">
         <h1>Student Dashboard</h1>
 
         <p>
@@ -30,10 +33,11 @@ if(
 
         <p>Your exams will appear here when they are assigned.</p>
 
-        <form action = "logout.php" method = "POST">
-            <button type = "submit">Log out</button>
+        <form action="logout.php" method="POST">
+            <button type="submit">Log out</button>
         </form>
     </main>
-    
+
 </body>
+
 </html>

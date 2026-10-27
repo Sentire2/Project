@@ -10,10 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
 $stmt = $pdo->prepare(
-    "SELECT id, name, email, student_id, password_hash, role
-    From users
-    WHERE email = ? OR student_id = ?
-    LIMIT 1"
+    "SELECT id, name, email, student_id, password_hash,
+            role, must_change_password
+     FROM users
+     WHERE email = ? OR student_id = ?
+     LIMIT 1"
 );
 
 $stmt->execute([$username, $username]);
@@ -29,6 +30,14 @@ session_regenerate_id(true);
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['name'] = $user['name'];
 $_SESSION['role'] = $user['role'];
+
+if (
+    $user['role'] === 'student' &&
+    (bool) $user['must_change_password']
+) {
+    header('Location: change_password.php');
+    exit;
+}
 
 if ($user['role'] === 'teacher') {
     header('Location: teacher_dashboard.php');
