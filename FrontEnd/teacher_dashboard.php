@@ -116,6 +116,7 @@ try {
                 <th>Student ID</th>
                 <th>Name</th>
                 <th>Account Created</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -144,6 +145,22 @@ try {
                                     ENT_QUOTES,
                                     'UTF-8'
                                 ) ?>
+                </td>
+                <td>
+                    <a href="edit_student.php?id=<?= (int)$student['id'] ?>">
+                        Edit
+                    </a>
+
+                    <form action="delete_student.php" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this student?');"
+                        style="display: inline;">
+                        <input type="hidden" name="id" value="<?= (int)$student['id'] ?>">
+
+                        <input type="hidden" name="csrf_token"
+                            value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8') ?>">
+
+                        <button type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach; ?>
